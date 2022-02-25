@@ -31,6 +31,14 @@ dat$site_class <- ftypes$site_class[match(dat$plot, ftypes$plot)]
 save(dat, file = "dat-temp.rda")
 
 # Do this section on laptop, w/ ht_model_op ------------------------------------
-load("dat_temp.rda")
+library(tidyverse)
+load("dat-temp.rda")
 load("../big-rdas/ht-model-op.rda")
 
+dat$ht <- predict(ht_model_op, newdata = dat)
+
+dat <- select(dat, stand, plot, tree, spp, dbh, cr, logs, ba, bal, forest_type,
+              site_class, lat, lon, elev, ht, tpa_tree, ba_tree)
+class(dat) <- "simready"
+
+save(dat, file = "dat-simready.rda")
