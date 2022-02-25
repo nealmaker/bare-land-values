@@ -26,5 +26,6 @@ out <- lapply(1:nrow(dat), function(i){
   do.call(paste0, x)
 })
 dat$logs <- unlist(out)
+dat <- select(dat, -sppgrp)
 
 write.csv(dat, file = "data/bare-land-with-logs.csv")
