@@ -41,3 +41,22 @@ results <- lapply(drates, function(j){
     mutate(cutyr = cutyr * paramsg$steplength)
 })
 
+result_values <- lapply(1:length(drates), function(x){
+  params$drate <- drates[x]
+  treesx <- results[[x]]
+  lapply(unique(treesgo$plot), function(y){
+    treesy <- treesx[treesx$plot == y,]
+    bl_objective(treesy$cutyr, treesy, params = params)
+  })
+})
+
+result_values <- unlist(lapply(1:length(drates), function(i){
+  unlist(result_values[[i]])
+}))
+
+result_values <- data.frame(type = rep(unique(trees$plot), length(drates)),
+                            drate = rep(drates, 
+                                        each = length(unique(trees$plot))),
+                            bare_land_value = result_values)
+
+save(results, result_values, file = "results.rda")
