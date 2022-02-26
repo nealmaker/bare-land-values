@@ -42,11 +42,12 @@ results <- lapply(drates, function(j){
 })
 
 result_values <- lapply(1:length(drates), function(x){
-  params$drate <- drates[x]
+  paramsnew <- params
+  paramsnew$drate <- drates[x]
   treesx <- results[[x]]
   lapply(unique(treesgo$plot), function(y){
     treesy <- treesx[treesx$plot == y,]
-    bl_objective(treesy$cutyr, treesy, params = params)
+    bl_objective(treesy$cutyr, treesy, params = paramsnew)
   })
 })
 
