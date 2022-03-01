@@ -5,7 +5,7 @@ treesgo <- trees[!is.na(trees$spp), ]
 params <- params_default
 params$endyr <- 120
 
-drates <- c(.01, .02, .03, .05, .08)
+drates <- c(.073)
 
 results <- lapply(drates, function(j){
   paramsg <- params
@@ -47,7 +47,7 @@ result_values <- lapply(1:length(drates), function(x){
   treesx <- results[[x]]
   lapply(unique(treesgo$plot), function(y){
     treesy <- treesx[treesx$plot == y,]
-    bl_objective(treesy$cutyr, treesy, params = paramsnew)
+    bl_objective(treesy$cutyr/paramsnew$steplength, treesy, params = paramsnew)
   })
 })
 
