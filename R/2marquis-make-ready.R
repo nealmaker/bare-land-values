@@ -5,7 +5,8 @@
 library(forester)
 library(tidyverse)
 
-dat <- read.csv("data/bare-land-with-logs-marquis.csv") %>% 
+dat <- read.csv("data/bare-land-with-logs-marquis.csv") 
+dat <- dat %>% 
   mutate(stand = 1,
          tree = 1:nrow(dat),
          lat = 44.441, # On Paul Smiths prop
@@ -20,13 +21,11 @@ dat <- read.csv("data/bare-land-with-logs-marquis.csv") %>%
 
 dat$spp <- factor(dat$spp, levels = levels(simtrees_sample$spp))
 
-ftypes <- data.frame(plot = unique(dat$plot),
-                     forest_type = c("White pine",
-                                     "Spruce-fir",
-                                     rep("Northern hardwood", 3)),
-                     site_class = c(5, 6, 5, 4, 5))
-dat$forest_type <- ftypes$forest_type[match(dat$plot, ftypes$plot)]
-dat$site_class <- ftypes$site_class[match(dat$plot, ftypes$plot)]
+dat <- dat %>% 
+  mutate(forest_type = "Northern hardwood",
+         site_class = 5) %>% 
+  select(stand, plot, tree, spp, dbh, cr, logs, ba, bal, lat, lon, elev, 
+         forest_type, site_class, tpa_tree, ba_tree)
 
 save(dat, file = "dat-temp.rda")
 

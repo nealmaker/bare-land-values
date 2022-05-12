@@ -115,9 +115,5 @@ In Franklin Falls, pine stands are really mixedwood (now); there are also sp-fr 
 3. Sampled from distributions (using Marquis definitions of which species belong to which tolerance group) to get 100 lists of potential dbhs for the plot.
 4. Used list whose mean dbh and basal area most closely matched Marquis' observed values, by minimizing the difference between the harmonic mean of the Marquis measures and the harmonic mean of the diameter lists' measures.
 5. Determined from FIA data that CR distributions are appx. normal. Grouped FIA data by species, 1" dbh classes, and 20sqft bal classes, then calculated mean and sd of crown ratios in each group.
-<<<<<<< HEAD
 6. Randomly sampled CR from normal distributions for each spp/dbh/bal group in plot data, using means and sds calculated in step 5, to generate unique CR for each tree. Verified that each group had > 20 observations in FIA, for reasonable estimate of distribution.
 7. Assigned log calls stochastically with RQM (all at once in R).
-=======
-6. Randomly sampled CR from normal distributions for each spp/dbh/bal group in plot data, using means and sds calculated in step 5, to generate unique CR for each tree.
->>>>>>> f67577a794ba9d0b8f71644c5fbfe3c2b957d90e
