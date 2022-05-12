@@ -117,3 +117,7 @@ In Franklin Falls, pine stands are really mixedwood (now); there are also sp-fr 
 5. Determined from FIA data that CR distributions are appx. normal. Grouped FIA data by species, 1" dbh classes, and 20sqft bal classes, then calculated mean and sd of crown ratios in each group.
 6. Randomly sampled CR from normal distributions for each spp/dbh/bal group in plot data, using means and sds calculated in step 5, to generate unique CR for each tree. Verified that each group had > 20 observations in FIA, for reasonable estimate of distribution.
 7. Assigned log calls stochastically with RQM (all at once in R).
+8. Predicted tree heights using parametric height model we developed previously from FIA data (stored in "big-rdas/ht-model-op.rda" on N laptop).
+
+### Notes
+- When simulator is used to grow plot to age 105 without any cutting, the basal area climbs to an unrealistic value of 428 sqft. We saw this problem with the first run for Franklin Falls' bare land calculations too. It is a product of the poor job Weiskittel's parametric mortality model is doing accounting for self thinning. We don't think it will affect this analysis meaningfully, because optimal management is maintaining the stocking well below a-line and self thinning is negligible.
