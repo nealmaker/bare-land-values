@@ -23,21 +23,21 @@
 - BA for 3.8” mean dbh is ~138 sqft @ a-line
 - BA for 5.5” mean dbh is ~175 sqft @ a-line
 
-### FIA data (my exploration) 
+### FIA data (my exploration)
 - wp 4” - 7” in stands 140 - 200 sqft: mean CR is 35%, sd CR is 16%
 
-### @eyre_forest_1980 
+### @eyre_forest_1980
 - type 21; wp predominant, can be pure; common associates sm, asp, sometimes pb & yb
 
-### Franklin Falls 
+### Franklin Falls
 - 480a plan shows sm, bf, pb as main associates
 
 ## Spruce-Fir
 ### @frank_silvicultural_1973
 - spp composition on primary sw sites dominated by sp & fr. Other sw can include eh, wp, cd, tam. <25% hw. Hw are pb, yb, asp, sm, occassional be or hm
 
-### @eyre_forest_1980 
-- corroborate frank on composition, in red spruce-balsam fir cover type (#33) 
+### @eyre_forest_1980
+- corroborate frank on composition, in red spruce-balsam fir cover type (#33)
 
 ### @olson_forty_2012 central Maine
 - at age 29, control (unthinned no herbicide) had ~11,000 trees/hectare, 37 sqm/ha ba (4,400 tpa, 160 sqft/ac ba)
@@ -89,16 +89,31 @@ In Franklin Falls, pine stands are really mixedwood (now); there are also sp-fr 
 
 ### See poor hardwood notes from marquis
 
-## AS BUILT
+## AS BUILT: 1st TIME, FOR FRANKLIN FALLS
 - (1) 1/35 ac plot for each type
 - Used the 5 types above
 - All plots are age 30
 
 ### Process
-1. Used researched stocking numbers to determine #trees 
+1. Used researched stocking numbers to determine #trees
 2. assigned spp % based on research and experience and figured # plot trees proportionally
-3. randomly sampled dbh from log normal dist (giving skew in line with @marquis) within spp (b/c pines will be bigger, eg.), adjusting mean dbhs for each spp to get desired overall mean dbh (from stocking research). Used std. dev. of 1.4 (in `rlnorm` as log(1.4)) b/c it consistantly gave good looking skews, without any wierdly large individuals. 
+3. randomly sampled dbh from log normal dist (giving skew in line with @marquis) within spp (b/c pines will be bigger, eg.), adjusting mean dbhs for each spp to get desired overall mean dbh (from stocking research). Used std. dev. of 1.4 (in `rlnorm` as log(1.4)) b/c it consistantly gave good looking skews, without any wierdly large individuals.
 4. Checked mean dbh & plot stocking; re-sampled dbh if necessary to get them close to target
 5. randomly sampled from normal dist (histograms show they’re appx. normal) for CR within spp, using means and sds from FIA data (filtered for appropriate dbh and stand ba).
 6. Assigned CRs to DBHs by hand, somewhat random, but bigger dbh getting bigger CR
 7. Assigned log calls stochastically with RQM (all at once in R)
+
+## AS BUILT: MARQUIS VERSION
+- (1) 1/24.072 ac plot (24' radius, like FIA subplots)
+- Representing one forest type: a kind of medium hw site on granitic tills (Marquis was at Bartlett)
+- Plot is age 25 b/c Marquis has that data and that's often the preferred precommercial thinning date.
+- Mostly based on @marquis_clearcutting_1967
+
+### Process
+1. Assumed softwood in Marquis was EH, because they listed that as the common softwood associate at the start of the paper. Used 169 trees total (would have been 170 based on Marquis total stocking numbers, but rounding in spp specific percentages changed it a bit). Spp percentages directly from Marquis' year 25 measurements: 25% BE (42 trees), 26% HM (44), 12% YB (20), 10% PB (17), 16% Other HW (was pin cherry in Marquis, 27 trees), 4% SM (7), 3% STM (5), 1% EH (2), 2% ASH (3), and 1% ASP (2).
+2. Built log normal dbh distributions for intolerants, intermediates, and tolerants based on mean dbhs reported by Marquis (2.7, 1.8, and 1.3", respectively) and choosing SD for each to match the actual observed distributions that Marquis shows in Fig. 1. Std dev for intolerants was determined to be 1.8, intermediates 2.0, and tolerants 1.4. In R, written as rlnorm(n, log(mean), log(sd)).
+3. Sampled from distributions (using Marquis definitions of which species belong to which tolerance group) to get 100 lists of potential dbhs for the plot.
+4. Used list whose mean dbh and basal area most closely matched Marquis' observed values, by minimizing the difference between the harmonic mean of the Marquis measures and the harmonic mean of the diameter lists' measures.
+5. Determined from FIA data that CR distributions are appx. normal. Grouped FIA data by species, 1" dbh classes, and 20sqft bal classes, then calculated mean and sd of crown ratios in each group.
+6. Randomly sampled CR from normal distributions for each spp/dbh/bal group in plot data, using means and sds calculated in step 5, to generate unique CR for each tree. Verified that each group had > 20 observations in FIA, for reasonable estimate of distribution.
+7. Assigned log calls stochastically with RQM (all at once in R).
