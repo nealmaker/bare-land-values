@@ -40,4 +40,4 @@ dat <- select(dat, stand, plot, tree, spp, dbh, cr, logs, ba, bal, forest_type,
               site_class, lat, lon, elev, ht, tpa_tree, ba_tree)
 class(dat) <- "simready"
 
-save(dat, file = "dat-simready.rda")
+save(dat, file = "dat-simready-marquis.rda")
