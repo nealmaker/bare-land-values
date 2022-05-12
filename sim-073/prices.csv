@@ -1,0 +1,26 @@
+"","spp","spp_grp","mill_grade2","pulp_roadside"
+"1","ash","mvh",400,160
+"2","aspen","lvh",170,125
+"3","fir","sw",230,125
+"4","basswood","lvh",190,125
+"5","beech","lvh",190,160
+"6","black cherry","hvh",400,160
+"7","cedar","sw",360,125
+"8","elm","lvh",160,160
+"9","hard maple","hvh",460,160
+"10","hemlock","pine_hem",250,125
+"11","hickory","mvh",400,160
+"12","hophornbeam","lvh",160,160
+"13","paper birch","mvh",320,160
+"14","red oak","hvh",450,160
+"15","red pine","pine_hem",280,125
+"16","scots pine","pine_hem",280,125
+"17","soft maple","mvh",370,160
+"18","spruce","sw",340,125
+"19","striped maple","lvh",160,160
+"20","tamarack","sw",340,125
+"21","white oak","mvh",350,160
+"22","white pine","pine_hem",330,125
+"23","yellow birch","hvh",420,160
+"24","other hardwood","lvh",190,160
+"25","other softwood","sw",170,125
