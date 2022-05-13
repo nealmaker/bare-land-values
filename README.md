@@ -106,7 +106,7 @@ In Franklin Falls, pine stands are really mixedwood (now); there are also sp-fr 
 ## AS BUILT: MARQUIS VERSION
 - (1) 1/24.072 ac plot (24' radius, like FIA subplots)
 - Representing one forest type: a kind of medium hw site on granitic tills (Marquis was at Bartlett)
-- Plot is age 25 b/c Marquis has that data and that's often the preferred precommercial thinning date.
+- Age 25 plot initialized b/c Marquis has that data, grown forward without cutting to get a 50 year old start b/c that's a good start to commercial thinning.
 - Mostly based on @marquis_clearcutting_1967
 
 ### Process
@@ -118,6 +118,6 @@ In Franklin Falls, pine stands are really mixedwood (now); there are also sp-fr 
 6. Randomly sampled CR from normal distributions for each spp/dbh/bal group in plot data, using means and sds calculated in step 5, to generate unique CR for each tree. Verified that each group had > 20 observations in FIA, for reasonable estimate of distribution.
 7. Assigned log calls stochastically with RQM (all at once in R).
 8. Predicted tree heights using parametric height model we developed previously from FIA data (stored in "big-rdas/ht-model-op.rda" on N laptop).
-
-### Notes
-- When simulator is used to grow plot to age 105 without any cutting, the basal area climbs to an unrealistic value of 428 sqft. We saw this problem with the first run for Franklin Falls' bare land calculations too. It is a product of the poor job Weiskittel's parametric mortality model is doing accounting for self thinning. We don't think it will affect this analysis meaningfully, because optimal management is maintaining the stocking well below a-line and self thinning is negligible.
+9. Grew forward 25 years without cutting, using "np" models.
+10. Killed trees stochastically and removed dead trees from data based on cumulative survival rates. JDF did this a bunch of times in Excel and chose the resulting tree list with log calls that best approximated RQM and with BA closest to modeled BA (using cumsurv).
+11. Optimization used 5 year timesteps for growth predictions (best b/c that's the average FIA remeasurement period), but only allowed logging every other timestep (b/c 10 years is a more reasonable cutting cycle). Optimization was actually done in .R file in 'forester' project, because that package couldn't be installed on the computer at the time.

@@ -1,3 +1,8 @@
+# NOW IMPLEMENTED IN FORESTER B/C FORESTER CAN"T BE INSTALLED!!!!
+
+
+
+
 #' NPV from harvest schedule for optimizer; FOR STANDS STARTING @ 25 YRS
 #'
 #' Calculates perpetual net present value of a single plot from a given harvest schedule
