@@ -3,7 +3,7 @@
 
 
 
-#' NPV from harvest schedule for optimizer; FOR STANDS STARTING @ 25 YRS
+#' NPV from harvest schedule for optimizer; FOR STANDS STARTING @ 50 YRS
 #'
 #' Calculates perpetual net present value of a single plot from a given harvest schedule
 #'
@@ -56,7 +56,7 @@ bl_objective_marq <- function(schedule, trees, params = params_default) {
   }
   
   # return plot's per-acre NPV
-  t30NPV <- sum(trees$tpa_tree * tv / (1 + params$drate) ^ schedule)
-  NPV <- t30NPV / (1 + params$drate) ^ 30
-  NPV / (1 - (1 / (1 + params$drate) ^ (max(schedule) + 30)))
+  t50NPV <- sum(trees$tpa_tree * tv / (1 + params$drate) ^ schedule)
+  NPV <- t50NPV / (1 + params$drate) ^ 50
+  NPV / (1 - (1 / (1 + params$drate) ^ (max(schedule) + 50)))
 }
